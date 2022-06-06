@@ -3,7 +3,7 @@ import GithubContext from "../../context/github/GithubContext";
 
 function UserSearch() {
   const [text, setText] = useState("");
-  const { users } = useContext(GithubContext);
+  const { users, searchUsers } = useContext(GithubContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,8 +11,7 @@ function UserSearch() {
     if (text === "") {
       alert("Enter some text");
     } else {
-      // TODO: Search users
-
+      searchUsers(text);
       setText("");
     }
   };
