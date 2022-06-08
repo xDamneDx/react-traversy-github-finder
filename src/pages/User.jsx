@@ -5,9 +5,11 @@ import GithubContext from "../context/github/GithubContext";
 
 // Components:
 import Spinner from "../components/layout/Spinner";
+import RepoList from "../components/repos/RepoList";
 
 function User() {
-  const { getUser, user, loading } = useContext(GithubContext);
+  const { getUser, user, loading, repos, getUserRepos } =
+    useContext(GithubContext);
   const { login: username } = useParams();
   const {
     name,
@@ -28,6 +30,7 @@ function User() {
 
   useEffect(() => {
     getUser(username);
+    getUserRepos(username);
   }, []);
 
   if (loading) {
@@ -153,6 +156,8 @@ function User() {
               </div>
             </div>
           </div>
+
+          <RepoList repos={repos} />
         </div>
       </>
     )
