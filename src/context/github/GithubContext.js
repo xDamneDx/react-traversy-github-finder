@@ -17,20 +17,6 @@ export const GithubProvider = ({ children }) => {
   const setLoading = () => dispatch({ type: "SET_LOADING" });
   const clearUsers = () => dispatch({ type: "CLEAR_USERS" });
 
-  // Get single user:
-  const getUser = async (login) => {
-    setLoading();
-
-    const response = await fetch(`${GITHUB_URL}/users/${login}`);
-
-    if (response.status === 404) {
-      window.location = "/notfound";
-    } else {
-      const data = await response.json();
-      dispatch({ type: "GET_USER", payload: data });
-    }
-  };
-
   // Get user repos:
   const getUserRepos = async (login) => {
     setLoading();
@@ -52,7 +38,6 @@ export const GithubProvider = ({ children }) => {
       value={{
         ...state,
         dispatch,
-        getUser,
         clearUsers,
         getUserRepos,
       }}
